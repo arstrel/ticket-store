@@ -22,7 +22,7 @@ router.post(
     }
 
     const { email, password } = req.body;
-    throw new Error('test');
+    throw new DatabaseConnectionError();
     res.send('[Auth service] Signup endpoint');
   }
 );
