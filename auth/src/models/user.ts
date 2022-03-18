@@ -1,4 +1,5 @@
 import { Schema, model } from 'mongoose';
+import { Password } from '../services/password';
 
 // Properties that are required to create a new user
 interface UserAttrs {
@@ -22,11 +23,16 @@ const userSchema = new Schema<UserModel>({
   },
 });
 
-const User = model<UserModel>('User', userSchema);
-
-const user = new User<UserAttrs>({
-  email: 'stuff@test.com',
-  password: 'testpass#1',
+userSchema.pre('save', async function (done) {
+  // event is we just creating a new user this will return true
+  // but we need this check to avoid re-hashing the existing password on user edit
+  if (this.isModified('password')) {
+    const hashed = await Password.toHash(this.get('password'));
+    this.set('password', hashed);
+  }
+  done();
 });
+
+const User = model<UserModel>('User', userSchema);
 
 export { User, UserAttrs };
