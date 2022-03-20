@@ -3,6 +3,7 @@ import { body, validationResult } from 'express-validator';
 import { RequestValidationError } from '../errors/request-validation-error';
 import { User, UserAttrs } from '../models/user';
 import { BadRequestError } from '../errors/bad-request-error';
+import jwt from 'jsonwebtoken';
 
 const router = express.Router();
 
@@ -30,11 +31,20 @@ router.post(
       throw new BadRequestError('Email already in use');
     }
 
-    const user = new User<UserAttrs>({
+    const userDoc = new User<UserAttrs>({
       email,
       password,
     });
-    await user.save();
+    const user = await userDoc.save();
+
+    // Generate JWT
+    const userJwt = jwt.sign(
+      { email: user.email, id: user.id },
+      process.env.JWT_KEY as string // we check that this exist at the app start
+    );
+
+    // Store it on session object
+    req.session = { jwt: userJwt };
 
     res.status(201).send(user);
   }
