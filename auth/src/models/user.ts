@@ -12,16 +12,29 @@ interface UserModel {
   password: string;
 }
 
-const userSchema = new Schema<UserModel>({
-  email: {
-    type: String,
-    required: true,
+const userSchema = new Schema<UserModel>(
+  {
+    email: {
+      type: String,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
   },
-  password: {
-    type: String,
-    required: true,
-  },
-});
+  {
+    // set of properties to help mongoose take doc and turn it into JSON
+    toJSON: {
+      transform: (doc, ret) => {
+        ret.id = ret._id;
+        delete ret.password; // we never want to see password property on JSON representation of DB record
+        delete ret._id; // normalize id property
+      },
+      versionKey: false,
+    },
+  }
+);
 
 userSchema.pre('save', async function (done) {
   // event is we just creating a new user this will return true
