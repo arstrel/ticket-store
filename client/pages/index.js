@@ -3,7 +3,11 @@ import { useAppContext } from 'context/state';
 
 function LandingPage() {
   const { user } = useAppContext();
-  return <h1>{user ? 'You are signed in' : 'You are not signed in yet'}</h1>;
+  return (
+    <div className="container p-4">
+      <h1>{user ? 'You are signed in' : 'You are not signed in yet'}</h1>
+    </div>
+  );
 }
 
 export async function getServerSideProps(context) {
