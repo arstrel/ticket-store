@@ -1,10 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.css';
+import Header from 'components/Header';
+import { AppWrapper } from 'context/state';
 
-export default function App({ Component, pageProps }) {
+export default function AppComponent({ Component, pageProps }) {
   return (
-    <div>
-      <h1>Header</h1>
+    <AppWrapper>
+      <Header {...pageProps} />
       <Component {...pageProps} />
-    </div>
+    </AppWrapper>
   );
 }
