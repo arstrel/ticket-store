@@ -16,6 +16,14 @@ app.use(
   })
 );
 
+app.get('/tickets', (req, res) => {
+  res.json('ticket service');
+});
+
+app.get('/tickets/1', (req, res) => {
+  res.json('ticket service: ticket 1');
+});
+
 app.all('*', async (req, res, next) => {
   throw new NotFoundError();
 });
