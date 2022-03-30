@@ -1,12 +1,7 @@
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
 
-import {
-  BadRequestError,
-  NotAuthorizedError,
-  validateRequest,
-  currentUser,
-} from '@sbsoftworks/gittix-common';
+import { validateRequest, requireAuth } from '@sbsoftworks/gittix-common';
 
 const router = express.Router();
 
@@ -17,17 +12,10 @@ router.post(
     body('price').notEmpty().withMessage('You must provide a price'),
   ],
   validateRequest,
-  currentUser,
+  requireAuth,
   async (req: Request, res: Response) => {
-    if (!req.currentUser) {
-      throw new NotAuthorizedError();
-    }
     res.status(200).send('ticket created');
   }
 );
-
-router.get('/api/tickets', async (req: Request, res: Response) => {
-  res.status(200).send({ title: 'test', price: 10 });
-});
 
 export { router as createTicketRouter };

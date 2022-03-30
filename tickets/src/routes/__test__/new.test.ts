@@ -8,11 +8,20 @@ it('has a route handler listening to /api/tickets for POST requests', async () =
 });
 
 it('can only be accessed if the user is signed in', async () => {
+  await request(app)
+    .post('/api/tickets')
+    .send({ title: 'test ticket', price: 10 })
+    .expect(401);
+});
+
+it('returns a status other than 401 if the user is signed in', async () => {
+  const cookie = await global.signin();
   const response = await request(app)
     .post('/api/tickets')
+    .set('Cookie', cookie)
     .send({ title: 'test ticket', price: 10 });
 
-  expect(response.status).toEqual(401);
+  expect(response.status).not.toEqual(401);
 });
 
 it('returns an error is an invalid title is provided', async () => {
@@ -30,9 +39,12 @@ it('returns an error is an invalid price is provided', async () => {
 });
 
 it('creates a ticket with a valid inputs', async () => {
+  const cookie = await global.signin();
+
   const response = await request(app)
     .post('/api/tickets')
+    .set('Cookie', cookie)
     .send({ title: 'test ticket', price: 10 });
 
-  // expect(response.status).toEqual(200);
+  expect(response.status).toEqual(200);
 });
