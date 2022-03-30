@@ -25,10 +25,10 @@ afterAll(async () => {
 });
 
 declare global {
-  function signin(): Promise<string[]>;
+  function signin(): string[];
 }
 
-global.signin = async () => {
+global.signin = () => {
   // Build a JWT payload. { id, email }
   const payload = {
     email: 'test@test.com',
