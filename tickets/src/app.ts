@@ -8,6 +8,8 @@ import {
   currentUser,
 } from '@sbsoftworks/gittix-common';
 import { createTicketRouter } from './routes/create';
+import { showTicketRouter } from './routes/show';
+import { updateTicketRouter } from './routes/update';
 
 const app = express();
 // express will see that the traffic is being proxied by kubernetes and won't trust https connection
@@ -23,6 +25,8 @@ app.use(
 app.use(currentUser);
 
 app.use(createTicketRouter);
+app.use(showTicketRouter);
+app.use(updateTicketRouter);
 
 app.all('*', async (req, res, next) => {
   throw new NotFoundError();
