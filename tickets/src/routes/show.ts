@@ -20,7 +20,7 @@ router.get(
   }
 );
 
-router.get('/api/tickets', requireAuth, async (req: Request, res: Response) => {
+router.get('/api/tickets', async (req: Request, res: Response) => {
   const tickets = await Ticket.find<TicketAttrs>({});
 
   res.status(200).json(tickets);
