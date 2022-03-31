@@ -1,6 +1,10 @@
 import express, { Request, Response } from 'express';
 import { Ticket } from '../models/ticket';
-import { NotFoundError, validateRequest } from '@sbsoftworks/gittix-common';
+import {
+  NotAuthorizedError,
+  NotFoundError,
+  validateRequest,
+} from '@sbsoftworks/gittix-common';
 import { body } from 'express-validator';
 import { requireAuth } from '@sbsoftworks/gittix-common';
 
@@ -11,7 +15,7 @@ router.put(
   requireAuth,
   [
     body('title').not().isEmpty().withMessage('Must provide a title'),
-    body('price').isFloat({ gt: 0 }).withMessage('Price must be more thatn 0'),
+    body('price').isFloat({ gt: 0 }).withMessage('Price must be more than 0'),
   ],
   validateRequest,
   async (req: Request, res: Response) => {
@@ -20,21 +24,18 @@ router.put(
       throw new NotFoundError();
     }
 
-    Ticket.findByIdAndUpdate(
-      req.params.id,
-      {
-        title: req.body.title,
-        price: req.body.price,
-      },
-      { new: true },
-      function (err, result) {
-        if (err) {
-          res.status(500).send(err.message);
-        }
+    if (ticket.userId !== req.currentUser!.id) {
+      throw new NotAuthorizedError();
+    }
 
-        res.status(200).json(result);
-      }
-    );
+    ticket.set({
+      title: req.body.title,
+      price: req.body.price,
+    });
+
+    await ticket.save();
+
+    res.status(200).json(ticket);
   }
 );
 
