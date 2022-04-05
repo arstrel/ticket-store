@@ -1,5 +1,6 @@
 import nats from 'node-nats-streaming';
 import { TicketCreatedListener } from './events/ticket-created-listener';
+import { TicketUpdatedListener } from './events/ticket-updated-listener';
 import { randomBytes } from 'crypto';
 
 const id = randomBytes(6).toString('hex');
@@ -17,6 +18,7 @@ stan.on('connect', () => {
   });
 
   new TicketCreatedListener(stan).listen();
+  new TicketUpdatedListener(stan).listen();
 });
 
 // Graceful termination

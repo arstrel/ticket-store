@@ -1,7 +1,8 @@
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
 import { Ticket, TicketAttrs } from '../models/ticket';
-
+import { TicketCreatedPublisher } from '../events/publishers/ticket-created-publisher';
+import { natsWrapper } from '../nats-wrapper';
 import { validateRequest, requireAuth } from '@sbsoftworks/gittix-common';
 
 const router = express.Router();
@@ -23,6 +24,13 @@ router.post(
       title: req.body.title,
       price: req.body.price,
       userId: req.currentUser!.id,
+    });
+
+    new TicketCreatedPublisher(natsWrapper.client).publish({
+      id: ticket.id,
+      title: ticket.title,
+      price: ticket.price,
+      userId: ticket.userId,
     });
 
     res.status(201).json(ticket);
