@@ -1,24 +1,23 @@
 import mongoose, { Schema, model } from 'mongoose';
+import { Order, OrderStatus } from './order';
 
-// properties that are required to create a ticket
-interface TicketAttrs {
+// properties that are required to create an Ticket
+interface TicketAttr {
   title: string;
   price: number;
-  userId: string;
 }
 
-// properties that a Ticket has
-interface TicketDoc extends mongoose.Document {
+// properties that an Ticket has
+export interface TicketDoc extends mongoose.Document {
   title: string;
   price: number;
-  userId: string;
+  isReserved(): Promise<boolean>;
 }
 
 const ticketSchema = new Schema<TicketDoc>(
   {
     title: { type: String, required: true },
-    price: { type: Number, required: true },
-    userId: { type: String, required: true },
+    price: { type: Number, required: true, min: 0 },
   },
   {
     toJSON: {
@@ -32,6 +31,25 @@ const ticketSchema = new Schema<TicketDoc>(
   }
 );
 
+// ticketSchema.statics for adding to the model
+// and .methods to add to the document
+ticketSchema.methods.isReserved = async function () {
+  // this === the ticket document that we just called 'isReserved' on
+
+  const existingOrder = await Order.findOne({
+    ticket: this,
+    status: {
+      $in: [
+        OrderStatus.Created,
+        OrderStatus.AwaitingPayment,
+        OrderStatus.Complete,
+      ],
+    },
+  });
+
+  return !!existingOrder;
+};
+
 const Ticket = model<TicketDoc>('Ticket', ticketSchema);
 
-export { Ticket, TicketAttrs };
+export { Ticket, TicketAttr };

@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { Ticket } from '../models/ticket';
+import { Order } from '../models/order';
 import {
   NotAuthorizedError,
   NotFoundError,
@@ -21,7 +21,7 @@ router.put(
   ],
   validateRequest,
   async (req: Request, res: Response) => {
-    const ticket = await Ticket.findById(req.params.id);
+    const ticket = await Order.findById(req.params.id);
     if (!ticket) {
       throw new NotFoundError();
     }
@@ -37,15 +37,15 @@ router.put(
 
     await ticket.save();
 
-    await new TicketUpdatedPublisher(natsWrapper.client).publish({
-      id: ticket.id,
-      userId: ticket.userId,
-      title: ticket.title,
-      price: ticket.price,
-    });
+    // await new TicketUpdatedPublisher(natsWrapper.client).publish({
+    //   id: ticket.id,
+    //   title: ticket.title,
+    //   price: priceid,
+    //   userId: userIdid,
+    // });
 
     res.status(200).json(ticket);
   }
 );
 
-export { router as updateTicketRouter };
+export { router as updateOrderRouter };
