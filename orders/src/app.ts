@@ -10,7 +10,7 @@ import {
 import { createOrderRouter } from './routes/create';
 import { showOrderRouter } from './routes/show';
 import { updateOrderRouter } from './routes/update';
-import { deleteOrderRouter } from './routes/delete';
+import { cancelOrderRouter } from './routes/delete';
 
 const app = express();
 // express will see that the traffic is being proxied by kubernetes and won't trust https connection
@@ -28,7 +28,7 @@ app.use(currentUser);
 app.use(createOrderRouter);
 app.use(showOrderRouter);
 app.use(updateOrderRouter);
-app.use(deleteOrderRouter);
+app.use(cancelOrderRouter);
 
 app.all('*', async (req, res, next) => {
   throw new NotFoundError();

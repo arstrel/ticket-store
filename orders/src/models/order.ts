@@ -44,4 +44,4 @@ const orderSchema = new Schema<OrderDoc>(
 
 const Order = model<OrderDoc>('Order', orderSchema);
 
-export { Order, OrderAttr, OrderStatus };
+export { Order, OrderAttr, OrderStatus, OrderDoc };
