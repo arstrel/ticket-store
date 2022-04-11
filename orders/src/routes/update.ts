@@ -7,8 +7,6 @@ import {
 } from '@sbsoftworks/gittix-common';
 import { body } from 'express-validator';
 import { requireAuth } from '@sbsoftworks/gittix-common';
-import { TicketUpdatedPublisher } from '../events/publishers/ticket-updated-publisher';
-import { natsWrapper } from '../nats-wrapper';
 
 const router = express.Router();
 
@@ -36,13 +34,6 @@ router.put(
     });
 
     await ticket.save();
-
-    // await new TicketUpdatedPublisher(natsWrapper.client).publish({
-    //   id: ticket.id,
-    //   title: ticket.title,
-    //   price: priceid,
-    //   userId: userIdid,
-    // });
 
     res.status(200).json(ticket);
   }

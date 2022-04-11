@@ -1,8 +1,8 @@
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
 import { Order, OrderAttr, OrderStatus } from '../models/order';
-import { Ticket, TicketAttr } from '../models/ticket';
-import { TicketCreatedPublisher } from '../events/publishers/ticket-created-publisher';
+import { Ticket } from '../models/ticket';
+import { OrderCreatedPublisher } from '../events/publishers/order-created-publisher';
 import { natsWrapper } from '../nats-wrapper';
 import {
   validateRequest,
@@ -49,13 +49,16 @@ router.post(
     });
 
     // Publish "order:created" event
-
-    // await new TicketCreatedPublisher(natsWrapper.client).publish({
-    //   id: order.id,
-    //   title: order.title,
-    //   price: order.price,
-    //   userId: order.userId,
-    // });
+    await new OrderCreatedPublisher(natsWrapper.client).publish({
+      id: order.id,
+      status: order.status,
+      userId: order.userId,
+      expiresAt: order.expiresAt.toISOString(),
+      ticket: {
+        id: ticket.id,
+        price: ticket.price,
+      },
+    });
 
     res.status(201).json(order);
   }

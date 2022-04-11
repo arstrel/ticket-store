@@ -2,6 +2,7 @@ import request from 'supertest';
 import { app } from '../../app';
 import { Ticket, TicketAttr } from '../../models/ticket';
 import { OrderStatus } from '@sbsoftworks/gittix-common';
+import { natsWrapper } from '../../nats-wrapper';
 
 const buildTicket = () => {
   const ticket = Ticket.create<TicketAttr>({
@@ -65,4 +66,15 @@ it('successfully marks the ticket as cancelled', async () => {
   expect(response.body.status).toEqual(OrderStatus.Cancelled);
 });
 
-it.todo('emits an order cancelled event');
+it('emits an order cancelled event', async () => {
+  const ticket = await buildTicket();
+  const user = global.signin();
+
+  const { body: order } = await request(app)
+    .post('/api/orders')
+    .set('Cookie', user)
+    .send({ ticketId: ticket.id })
+    .expect(201);
+
+  expect(natsWrapper.client.publish).toHaveBeenCalled();
+});
