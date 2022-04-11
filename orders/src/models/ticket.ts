@@ -5,6 +5,7 @@ import { Order, OrderStatus } from './order';
 interface TicketAttr {
   title: string;
   price: number;
+  _id: string;
 }
 
 // properties that an Ticket has
