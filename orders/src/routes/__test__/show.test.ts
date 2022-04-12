@@ -8,6 +8,7 @@ const buildTicket = () => {
   const ticket = Ticket.create<TicketAttr>({
     title: 'concert',
     price: 10,
+    _id: new mongoose.Types.ObjectId().toHexString(),
   });
 
   return ticket;

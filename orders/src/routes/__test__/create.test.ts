@@ -52,6 +52,7 @@ it('returns an error if the ticket is reserved', async () => {
   const ticket = await Ticket.create<TicketAttr>({
     title: 'test',
     price: 10,
+    _id: new mongoose.Types.ObjectId().toHexString(),
   });
 
   const order = await Order.create<OrderAttr>({
@@ -72,6 +73,7 @@ it('successfully creates an order with unreserved ticket', async () => {
   const ticket = await Ticket.create<TicketAttr>({
     title: 'concert',
     price: 10,
+    _id: new mongoose.Types.ObjectId().toHexString(),
   });
   const cookie = global.signin();
 
@@ -86,6 +88,7 @@ it('emits an order:created event', async () => {
   const ticket = await Ticket.create<TicketAttr>({
     title: 'concert',
     price: 10,
+    _id: new mongoose.Types.ObjectId().toHexString(),
   });
   const cookie = global.signin();
 

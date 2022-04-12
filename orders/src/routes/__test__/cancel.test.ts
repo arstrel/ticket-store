@@ -3,11 +3,13 @@ import { app } from '../../app';
 import { Ticket, TicketAttr } from '../../models/ticket';
 import { OrderStatus } from '@sbsoftworks/gittix-common';
 import { natsWrapper } from '../../nats-wrapper';
+import mongoose from 'mongoose';
 
 const buildTicket = () => {
   const ticket = Ticket.create<TicketAttr>({
     title: 'concert',
     price: 10,
+    _id: new mongoose.Types.ObjectId().toHexString(),
   });
 
   return ticket;

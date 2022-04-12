@@ -1,6 +1,7 @@
 import mongoose, { Schema, model } from 'mongoose';
 import { TicketDoc } from './ticket';
 import { OrderStatus } from '@sbsoftworks/gittix-common';
+import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
 
 // properties that are required to create an Order
 interface OrderAttr {
@@ -13,6 +14,7 @@ interface OrderAttr {
 // properties that an Order has
 interface OrderDoc extends mongoose.Document {
   userId: string;
+  version: number;
   status: OrderStatus;
   expiresAt: Date;
   ticket: TicketDoc;
@@ -37,10 +39,12 @@ const orderSchema = new Schema<OrderDoc>(
         ret.id = ret._id;
         delete ret._id;
       },
-      versionKey: false,
     },
   }
 );
+
+orderSchema.set('versionKey', 'version');
+orderSchema.plugin(updateIfCurrentPlugin);
 
 const Order = model<OrderDoc>('Order', orderSchema);
 
