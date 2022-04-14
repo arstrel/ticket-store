@@ -17,6 +17,13 @@ export interface TicketDoc extends mongoose.Document {
   isReserved(): Promise<boolean>;
 }
 
+interface TicketModel extends mongoose.Model<TicketDoc> {
+  findByEvent(event: {
+    version: number;
+    id: string;
+  }): Promise<TicketDoc | null>;
+}
+
 const ticketSchema = new Schema<TicketDoc>(
   {
     title: { type: String, required: true },
@@ -36,6 +43,12 @@ const ticketSchema = new Schema<TicketDoc>(
 ticketSchema.set('versionKey', 'version');
 ticketSchema.plugin(updateIfCurrentPlugin);
 // ticketSchema.statics for adding to the model
+ticketSchema.statics.findByEvent = (event: { id: string; version: number }) => {
+  return Ticket.findOne({
+    _id: event.id,
+    version: event.version - 1,
+  });
+};
 // and .methods to add to the document
 ticketSchema.methods.isReserved = async function () {
   // this === the ticket document that we just called 'isReserved' on
@@ -54,6 +67,6 @@ ticketSchema.methods.isReserved = async function () {
   return !!existingOrder;
 };
 
-const Ticket = model<TicketDoc>('Ticket', ticketSchema);
+const Ticket = model<TicketDoc, TicketModel>('Ticket', ticketSchema);
 
 export { Ticket, TicketAttr };

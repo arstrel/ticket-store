@@ -22,3 +22,16 @@ Common code and type definitions are separated into npm library that can be seen
 Each service connects to a separate database and runs in a separate container. All the containers are orchestrated by kubernetes.
 Skaffold is used to run all the parts on local and enable rebuild/restart on code changes.
 Run `skaffold dev` to start the app on local
+
+## Optimistic concurrence control
+
+Upon updating the entity (ticket or order), main service, responsible for managing such entity, increments the `version` property. All the rest of the services, upon receiving an event will check the version of the replicated entity in their own database. These services will only process the event if it is in order, meaning if it has a version of the entity of `-1` compared to the one in it's own database.
+This enables us to only process events in order of how they were issued.
+This is achieved by the plugin to mongoose schema that comes from `mongoose-update-if-current` package and changes to `onMessage` method implemented on event listeners. TicketUpdatedListener for example.
+
+## Why do we need "mongoose-update-if-current"
+
+This handy mongoose plugin does two things exactly:
+
+1. Updates the version number on records before they are saved. Increments version number by 1 every time
+2. Customizes the find-and-update operation (save) to look for the correct version. Instead of "find the record with this id" it becomes "find the record with this id and this version"

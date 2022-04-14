@@ -37,7 +37,7 @@ const userSchema = new Schema<UserModel>(
 );
 
 userSchema.pre('save', async function (done) {
-  // event is we just creating a new user this will return true
+  // When we are just creating a new user this condition will be true
   // but we need this check to avoid re-hashing the existing password on user edit
   if (this.isModified('password')) {
     const hashed = await Password.toHash(this.get('password'));
