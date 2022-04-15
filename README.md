@@ -5,9 +5,10 @@ Ticket store made with microservices and typescript
 ## Services
 
 1. Client: React app
-2. Auth: Node express server
-3. Ticket: Node express server
-4. Order: Node express server
+2. Auth: Node express server backed by MongoDB
+3. Ticket: Node express server backed by MongoDB
+4. Order: Node express server backed by MongoDB
+5. Expiration: Persistent timer Worker backed by Redis
 
 ## 3. Ticket service
 
