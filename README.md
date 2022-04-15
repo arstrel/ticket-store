@@ -9,6 +9,10 @@ Ticket store made with microservices and typescript
 3. Ticket: Node express server
 4. Order: Node express server
 
+## 3. Ticket service
+
+Presense of `orderId` on a Ticket indicates that the Ticket is locked because someone is trying to purchase it
+
 ## Technologies used:
 
 1. NATS Streaming server
@@ -35,3 +39,9 @@ This handy mongoose plugin does two things exactly:
 
 1. Updates the version number on records before they are saved. Increments version number by 1 every time
 2. Customizes the find-and-update operation (save) to look for the correct version. Instead of "find the record with this id" it becomes "find the record with this id and this version"
+
+## Data replication and consistent ids
+
+Tickets records are replicated between Ticket service and Orders service using NATS Streaming Server to publish and listen to events.
+Ticket service is responsible for creating a tickets and updating versions as needed.
+Orders service is storing only a partial information about a Ticket. Tickets has the same id in both places. In Orders service, upon creating a new Ticket, we use the id provided by Ticket service
