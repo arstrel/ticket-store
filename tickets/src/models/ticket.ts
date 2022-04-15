@@ -22,7 +22,7 @@ const ticketSchema = new Schema<TicketDoc>(
     title: { type: String, required: true },
     price: { type: Number, required: true },
     userId: { type: String, required: true },
-    orderId: { type: String, default: null },
+    orderId: { type: String, default: undefined },
   },
   {
     toJSON: {

@@ -1,13 +1,13 @@
 import mongoose from 'mongoose';
-import { OrderCreatedEvent, OrderStatus } from '@sbsoftworks/gittix-common';
-import { OrderCreatedListener } from '../order-created-listener';
+import { OrderCancelledEvent } from '@sbsoftworks/gittix-common';
 import { natsWrapper } from '../../../nats-wrapper';
 import { Ticket, TicketAttrs } from '../../../models/ticket';
+import { OrderCancelledListener } from '../order-cancelled-listener';
 
 const setup = async () => {
   // Create an instance of the listener
-  const listener = new OrderCreatedListener(natsWrapper.client);
-
+  const listener = new OrderCancelledListener(natsWrapper.client);
+  const orderId = new mongoose.Types.ObjectId().toHexString();
   // Create and save a ticket that we will try to reserve
   const ticket = await Ticket.create<TicketAttrs>({
     title: 'concert',
@@ -15,16 +15,16 @@ const setup = async () => {
     userId: new mongoose.Types.ObjectId().toHexString(),
   });
 
+  ticket.set({ orderId });
+
+  await ticket.save();
+
   // Create the fake data event
-  const data: OrderCreatedEvent['data'] = {
-    id: new mongoose.Types.ObjectId().toHexString(),
+  const data: OrderCancelledEvent['data'] = {
+    id: orderId,
     version: 0,
-    status: OrderStatus.Created,
-    userId: ticket.userId,
-    expiresAt: new Date().toISOString(),
     ticket: {
       id: ticket.id,
-      price: ticket.price,
     },
   };
 
@@ -36,14 +36,14 @@ const setup = async () => {
   return { listener, ticket, data, msg };
 };
 
-it('sets the userId of the ticket', async () => {
+it('sets the orderId of the ticket to undefined', async () => {
   const { listener, ticket, data, msg } = await setup();
 
   await listener.onMessage(data, msg);
 
   const updatedTicket = await Ticket.findById(ticket.id);
 
-  expect(updatedTicket!.orderId).toEqual(data.id);
+  expect(updatedTicket!.orderId).not.toBeDefined();
 });
 
 it('acks the message', async () => {
@@ -64,5 +64,5 @@ it('publishes a ticket updated event', async () => {
   const ticketUpdatedData = JSON.parse(
     (natsWrapper.client.publish as jest.Mock).mock.calls[0][1]
   );
-  expect(ticketUpdatedData.orderId).toEqual(data.id);
+  expect(ticketUpdatedData.orderId).not.toBeDefined();
 });
