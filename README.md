@@ -100,3 +100,4 @@ Ticket service is responsible for creating a tickets and updating versions as ne
 ## TODO
 
 - Add Swagger docs and ui
+- Remove Stripe sample code from .gitignore
