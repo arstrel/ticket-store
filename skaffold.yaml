@@ -40,6 +40,14 @@ build:
         manual:
           - src: 'src/**/*.js'
             dest: .
+    - image: arstrel/payments
+      context: payments
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.js'
+            dest: .
     - image: arstrel/ticketing-client
       context: client
       docker:

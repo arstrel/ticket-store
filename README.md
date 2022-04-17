@@ -1,6 +1,6 @@
 # ticket-store
 
-Ticket store made with microservices and typescript
+Ticket store using Typescript and microservices architecture.
 
 ## Services
 
@@ -8,13 +8,10 @@ Ticket store made with microservices and typescript
 2. Auth: Node express server backed by MongoDB
 3. Ticket: Node express server backed by MongoDB
 4. Order: Node express server backed by MongoDB
-5. Expiration: Persistent timer Worker backed by Redis
+5. Expiration: Persistent timer service backed by Redis
+6. Payment service with Stripe
 
-## 3. Ticket service
-
-Presense of `orderId` on a Ticket indicates that the Ticket is locked because someone is trying to purchase it
-
-## Technologies used:
+## Other Technologies used:
 
 1. NATS Streaming server
 2. Kubernetes with Ingress-nginx load balancer
@@ -26,9 +23,63 @@ Common code and type definitions are separated into npm library that can be seen
 
 Each service connects to a separate database and runs in a separate container. All the containers are orchestrated by kubernetes.
 Skaffold is used to run all the parts on local and enable rebuild/restart on code changes.
-Run `skaffold dev` to start the app on local
+Run `skaffold dev` to start all services on local
 
-## Optimistic concurrence control
+## Testing
+
+Each backend service has tests that can be run with `npm run test`.
+Tests are using InMemory Mongo database and do not issue requests to a real DB
+
+## Events published by each service
+
+1. Ticket service: tickets
+2. Orders service: orders, tickets
+3. Payments service: charges, orders
+4. Expiration service: expiration
+
+## 3. Notes about Tickets service
+
+Emits events about Tickets.
+
+```
+ticket:created
+ticket:updated
+```
+
+Listens to following events
+
+```
+order:created
+order:cancelled
+```
+
+This service increments `Ticket` version number for the purposes of concurrency control.
+Presense of `orderId` on a `Ticket` indicates that the Ticket is locked, because someone is trying to purchase it. onOrderCancelled `Ticket.orderId` is set back to undefined to unlock the Ticket.
+
+## 4. Notes about Orders service
+
+Data replication and consistent ids: Orders service is storing only a partial information about a Ticket. In Orders service, upon creating a new Ticket, the id provided by Ticket service is being used. That way same Tickets have same ids across two services.
+This service increments `Order` version number for the purposes of concurrency control.
+
+## 5. Notes about Payments service
+
+Listens to
+
+```
+order:created
+order:cancelled
+```
+
+Emits
+
+```
+charge:created
+```
+
+This service maintains Charges data and replicates the data from Orders events.
+This service increments `Charge` version number for the purposes of concurrency control.
+
+## Optimistic concurrency control
 
 Upon updating the entity (ticket or order), main service, responsible for managing such entity, increments the `version` property. All the rest of the services, upon receiving an event will check the version of the replicated entity in their own database. These services will only process the event if it is in order, meaning if it has a version of the entity of `-1` compared to the one in it's own database.
 This enables us to only process events in order of how they were issued.
@@ -45,4 +96,7 @@ This handy mongoose plugin does two things exactly:
 
 Tickets records are replicated between Ticket service and Orders service using NATS Streaming Server to publish and listen to events.
 Ticket service is responsible for creating a tickets and updating versions as needed.
-Orders service is storing only a partial information about a Ticket. Tickets has the same id in both places. In Orders service, upon creating a new Ticket, we use the id provided by Ticket service
+
+## TODO
+
+- Add Swagger docs and ui
