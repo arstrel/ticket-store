@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import { OrderCreatedEvent, OrderStatus } from '@sbsoftworks/gittix-common';
 import { natsWrapper } from '../../../nats-wrapper';
 import { OrderCreatedListener } from '../order-created-listener';
-import { Order, OrderAttrs } from '../../../models/order';
+import { Order } from '../../../models/order';
 
 const setup = async () => {
   const listener = new OrderCreatedListener(natsWrapper.client);
