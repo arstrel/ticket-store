@@ -4,12 +4,21 @@ import Image from 'next/image';
 import logoPic from 'content/images/logo.svg';
 import styles from 'styles/header.module.css';
 import Router from 'next/router';
+import { useAppContext } from 'context/state';
+import { useEffect } from 'react';
 
 export default function Header({ currentUser }) {
+  const { setUser } = useAppContext();
+
   const handleSignout = async () => {
     await axios.post('/api/users/signout');
+    setUser(null);
     Router.push('/');
   };
+
+  useEffect(() => {
+    setUser(currentUser);
+  }, []);
 
   return (
     <div className={`d-flex justify-content-between p-3 ${styles.header}`}>
@@ -24,13 +33,18 @@ export default function Header({ currentUser }) {
         </div>
       </Link>
       {currentUser ? (
-        <a
-          onClick={handleSignout}
-          href="#"
-          className="mx-3 d-flex align-items-center"
-        >
-          Sign out
-        </a>
+        <div className="d-flex align-items-center">
+          <Link href="/tickets/new">
+            <a className="mx-3">New Ticket</a>
+          </Link>
+          <a
+            onClick={handleSignout}
+            href="#"
+            className="mx-3 d-flex align-items-center"
+          >
+            Sign out
+          </a>
+        </div>
       ) : (
         <div className="d-flex align-items-center">
           <Link href="/auth/signup">

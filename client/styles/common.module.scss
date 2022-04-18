@@ -1,0 +1,7 @@
+.successList {
+  list-style: none;
+
+  .successItem:before {
+    content: '✓';
+  }
+}

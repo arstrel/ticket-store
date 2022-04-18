@@ -21,37 +21,41 @@ export default function AuthForm({ type }) {
   };
 
   return (
-    <form onSubmit={onSubmit} className="m-4">
-      <h1>{type.title}</h1>
-      <div className="mb-3">
-        <label className="form-label" htmlFor="input-email">
-          Email Address
-        </label>
-        <input
-          id="input-email"
-          className="form-control"
-          value={formValues.email}
-          name="email"
-          onChange={handleInput}
-        />
+    <div className="row">
+      <div className="col-sm-12 col-lg-4">
+        <form onSubmit={onSubmit} className="m-4">
+          <h1>{type.title}</h1>
+          <div className="mb-3">
+            <label className="form-label" htmlFor="input-email">
+              Email Address
+            </label>
+            <input
+              id="input-email"
+              className="form-control"
+              value={formValues.email}
+              name="email"
+              onChange={handleInput}
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label" htmlFor="input-password">
+              Password
+            </label>
+            <input
+              id="input-password"
+              type="password"
+              name="password"
+              className="form-control"
+              value={formValues.password}
+              onChange={handleInput}
+            />
+          </div>
+          {errors}
+          <button type="submit" className="btn btn-primary">
+            {type.actionLabel}
+          </button>
+        </form>
       </div>
-      <div className="mb-3">
-        <label className="form-label" htmlFor="input-password">
-          Password
-        </label>
-        <input
-          id="input-password"
-          type="password"
-          name="password"
-          className="form-control"
-          value={formValues.password}
-          onChange={handleInput}
-        />
-      </div>
-      {errors}
-      <button type="submit" className="btn btn-primary">
-        {type.actionLabel}
-      </button>
-    </form>
+    </div>
   );
 }
