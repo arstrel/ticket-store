@@ -73,11 +73,11 @@ order:cancelled
 Emits
 
 ```
-charge:created
+payment:created
 ```
 
-This service maintains Charges data and replicates the data from Orders events.
-This service increments `Charge` version number for the purposes of concurrency control.
+This service maintains Payments and Orders data collections with Payments being a records of successful stripe charges in relationship to orderIds
+and Orders being a replicared orders data.
 
 ## Optimistic concurrency control
 
@@ -101,3 +101,4 @@ Ticket service is responsible for creating a tickets and updating versions as ne
 
 - Add Swagger docs and ui
 - Remove Stripe sample code from .gitignore
+- Add order:updated event to be emited upon order completed in order service

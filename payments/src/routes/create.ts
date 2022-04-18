@@ -9,6 +9,10 @@ import {
   OrderStatus,
 } from '@sbsoftworks/gittix-common';
 import { Order } from '../models/order';
+import { stripe } from '../stripe';
+import { Payment, PaymentAttrs } from '../models/payment';
+import { PaymentCreatedPublisher } from '../events/publishers/payment-created-publisher';
+import { natsWrapper } from '../nats-wrapper';
 
 const router = express.Router();
 
@@ -38,8 +42,25 @@ router.post(
     }
 
     // create a charge with Stripe
+    const charge = await stripe.charges.create({
+      amount: order.price * 100,
+      currency: 'usd',
+      source: token,
+      description: `GitTix store: orderId: ${order.id}`,
+    });
 
-    res.send({ success: true });
+    const payment = await Payment.create<PaymentAttrs>({
+      orderId: order.id,
+      stripeId: charge.id,
+    });
+
+    await new PaymentCreatedPublisher(natsWrapper.client).publish({
+      id: payment.id,
+      orderId: payment.orderId,
+      stripeId: payment.stripeId,
+    });
+
+    res.status(201).send(payment);
   }
 );
 
