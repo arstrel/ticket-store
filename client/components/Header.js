@@ -6,18 +6,15 @@ import { useAppContext } from 'context/state';
 import Image from 'next/image';
 import logoPic from 'content/images/logo.svg';
 import styles from 'styles/header.module.css';
+import Router from 'next/router';
 
 export default function Header({ currentUser }) {
   const { user, setUser } = useAppContext();
 
   const handleSignout = async () => {
     await axios.post('/api/users/signout');
-    setUser(null);
+    Router.push('/');
   };
-
-  useEffect(() => {
-    setUser(currentUser);
-  }, [currentUser]);
 
   return (
     <div className={`d-flex justify-content-between p-3 ${styles.header}`}>
@@ -31,7 +28,7 @@ export default function Header({ currentUser }) {
           </div>
         </div>
       </Link>
-      {user ? (
+      {currentUser ? (
         <a
           onClick={handleSignout}
           href="#"
@@ -51,11 +48,4 @@ export default function Header({ currentUser }) {
       )}
     </div>
   );
-}
-
-export async function getServerSideProps(context) {
-  const client = buildServersideClient(context);
-  const { data } = await client.get('/api/users/currentuser');
-
-  return { props: data };
 }

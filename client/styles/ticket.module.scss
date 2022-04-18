@@ -1,0 +1,15 @@
+.ticketSection {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 20px;
+}
+
+.ticketCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  flex: calc(33% - 20px) 1 1;
+  background-color: aliceblue;
+  max-width: calc(33% - 20px);
+}
