@@ -1,4 +1,3 @@
-import { useAppContext } from 'context/state';
 import TicketCard from './TicketCard';
 import styles from 'styles/ticket.module.scss';
 
@@ -10,7 +9,7 @@ export default function TicketList({ tickets }) {
   return (
     <div className={`my-3 ${styles.ticketSection}`}>
       {tickets?.map((ticket) => (
-        <TicketCard ticket={ticket} id={ticket.id} />
+        <TicketCard ticket={ticket} key={ticket.id} />
       ))}
     </div>
   );

@@ -1,10 +1,7 @@
 import { buildServersideClient } from 'api/build-client';
-import { useAppContext } from 'context/state';
 import TicketList from 'components/TicketList';
 
 function LandingPage({ currentUser, tickets }) {
-  // const { user } = useAppContext();
-
   return (
     <div className="container p-4">
       <h1>{currentUser ? 'You are signed in' : 'You are not signed in yet'}</h1>

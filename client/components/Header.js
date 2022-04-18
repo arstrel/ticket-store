@@ -1,16 +1,11 @@
-import { buildServersideClient } from 'api/build-client';
 import axios from 'axios';
 import Link from 'next/link';
-import { useEffect } from 'react';
-import { useAppContext } from 'context/state';
 import Image from 'next/image';
 import logoPic from 'content/images/logo.svg';
 import styles from 'styles/header.module.css';
 import Router from 'next/router';
 
 export default function Header({ currentUser }) {
-  const { user, setUser } = useAppContext();
-
   const handleSignout = async () => {
     await axios.post('/api/users/signout');
     Router.push('/');
@@ -22,7 +17,7 @@ export default function Header({ currentUser }) {
         <div
           className={`d-flex justiry-content-between align-items-center ${styles.logo}`}
         >
-          <Image src={logoPic} width={100} height={100} />
+          <Image src={logoPic} width={100} height={100} alt="logo" />
           <div>
             <h3>GitTix store</h3>
           </div>
