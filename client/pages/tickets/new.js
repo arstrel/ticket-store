@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import useRequest from 'hooks/use-request';
+import { buildServersideClient } from 'api/build-client';
 
 export default function CreateTicket() {
   const initialFormState = { title: '', price: '' };
@@ -26,6 +27,15 @@ export default function CreateTicket() {
     setFormValues({ ...formValues, [name]: value });
   };
 
+  const onBlur = () => {
+    const value = parseFloat(formValues.price);
+    if (isNaN(value)) {
+      return;
+    }
+
+    setFormValues({ ...formValues, price: value.toFixed(2) });
+  };
+
   return (
     <div className="container p-4">
       <h1>Create Ticket</h1>
@@ -50,11 +60,12 @@ export default function CreateTicket() {
               </label>
               <input
                 id="input-price"
-                type="number"
+                type="text"
                 name="price"
                 className="form-control"
                 value={formValues.price}
                 onChange={handleInput}
+                onBlur={onBlur}
               />
             </div>
             {errors}
@@ -67,4 +78,12 @@ export default function CreateTicket() {
       </div>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  const client = buildServersideClient(context);
+
+  const { data: user } = await client.get('/api/users/currentuser');
+
+  return { props: { currentUser: user.currentUser } };
 }
