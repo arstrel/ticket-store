@@ -1,10 +1,10 @@
 import express, { Request, Response } from 'express';
 import { Order, OrderStatus } from '../models/order';
 import {
+  BadRequestError,
   NotAuthorizedError,
   NotFoundError,
   requireAuth,
-  OrderCancelledEvent,
 } from '@sbsoftworks/gittix-common';
 import { OrderCancelledPublisher } from '../events/publishers/order-cancelled-publisher';
 import { natsWrapper } from '../nats-wrapper';
@@ -23,6 +23,10 @@ router.delete(
 
     if (order.userId !== req.currentUser!.id) {
       throw new NotAuthorizedError();
+    }
+
+    if (order.status === OrderStatus.Complete) {
+      throw new BadRequestError('Cannot cancel completed order');
     }
 
     order.set({

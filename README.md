@@ -79,6 +79,9 @@ payment:created
 This service maintains Payments and Orders data collections with Payments being a records of successful stripe charges in relationship to orderIds
 and Orders being a replicared orders data.
 
+Always working [test credit cards](https://stripe.com/docs/testing)
+example: 4242424242424242 with any 3 digits as code and any future date as expiration date
+
 ## Optimistic concurrency control
 
 Upon updating the entity (ticket or order), main service, responsible for managing such entity, increments the `version` property. All the rest of the services, upon receiving an event will check the version of the replicated entity in their own database. These services will only process the event if it is in order, meaning if it has a version of the entity of `-1` compared to the one in it's own database.

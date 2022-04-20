@@ -21,6 +21,8 @@ spec:
                 secretKeyRef:
                   name: jwt-secret
                   key: JWT_KEY
+            - name: EXPIRATION_WINDOW_SECONDS
+              value: '60'
             - name: MONGO_URI
               value: 'mongodb://orders-mongo-srv:27017/orders'
             - name: NATS_URL

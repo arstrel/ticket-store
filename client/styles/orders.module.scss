@@ -1,0 +1,23 @@
+table tbody td.status {
+  text-transform: capitalize;
+
+  &.complete {
+    color: green;
+  }
+
+  &.cancel {
+    color: darkred;
+  }
+}
+
+h5.status {
+  text-transform: capitalize;
+
+  &.complete {
+    color: green;
+  }
+
+  &.cancel {
+    color: darkred;
+  }
+}

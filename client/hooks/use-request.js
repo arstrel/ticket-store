@@ -11,9 +11,13 @@ export default function useRequest({
   const [errors, setErrors] = useState(null);
   const [success, setSuccess] = useState(null);
 
-  const doRequest = async () => {
+  const doRequest = async ({ props = {} } = {}) => {
+    console.log(props);
     try {
-      const response = await axios[method](url, body).then((res) => res.data);
+      const response = await axios[method](url, { ...body, ...props }).then(
+        (res) => res.data
+      );
+
       onSuccess(response);
       setSuccess(
         <div className="alert alert-success">
@@ -29,7 +33,7 @@ export default function useRequest({
         <div className="alert alert-danger">
           <h4>Ooops...</h4>
           <ul className="my-0">
-            {err.response.data.errors.map((singleError) => (
+            {err.response?.data.errors.map((singleError) => (
               <li key={singleError.message}>{singleError.message}</li>
             ))}
           </ul>

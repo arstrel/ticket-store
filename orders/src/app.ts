@@ -9,7 +9,6 @@ import {
 } from '@sbsoftworks/gittix-common';
 import { createOrderRouter } from './routes/create';
 import { showOrderRouter } from './routes/show';
-import { updateOrderRouter } from './routes/update';
 import { cancelOrderRouter } from './routes/delete';
 
 const app = express();
@@ -27,7 +26,6 @@ app.use(currentUser);
 
 app.use(createOrderRouter);
 app.use(showOrderRouter);
-app.use(updateOrderRouter);
 app.use(cancelOrderRouter);
 
 app.all('*', async (req, res, next) => {

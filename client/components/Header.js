@@ -28,10 +28,12 @@ export default function Header({ currentUser }) {
       </Link>
       {user ? (
         <div className="d-flex align-items-center">
+          <Link href="/orders">
+            <a className="mx-3">My Orders</a>
+          </Link>
           <Link href="/tickets/new">
             <a className="mx-3">New Ticket</a>
           </Link>
-
           <Link href="/auth/signout">
             <a className="mx-3">Sign out</a>
           </Link>

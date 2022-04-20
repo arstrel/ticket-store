@@ -13,7 +13,8 @@ import {
 
 const router = express.Router();
 
-const EXPIRATION_WINDOW_SECONDS = 1 * 60;
+const EXPIRATION_WINDOW_SECONDS =
+  Number(process.env.EXPIRATION_WINDOW_SECONDS) || 1 * 60;
 
 router.post(
   '/api/orders',

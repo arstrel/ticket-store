@@ -15,6 +15,9 @@ spec:
       containers:
         - name: client
           image: arstrel/ticketing-client
+          env:
+            - name: STRIPE_PUBLISHABLE_KEY
+              value: 'pk_test_51KpN2bLOtSi4sPcKVEXkooIbgxlek73SvyAVWWv2fSFjG48njXKIc5YFC7pLMzKVqYFuvl180IcdZpFojwGMuOFo00qzIVktub'
 ---
 apiVersion: v1
 kind: Service
