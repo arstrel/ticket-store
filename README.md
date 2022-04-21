@@ -100,8 +100,10 @@ This handy mongoose plugin does two things exactly:
 Tickets records are replicated between Ticket service and Orders service using NATS Streaming Server to publish and listen to events.
 Ticket service is responsible for creating a tickets and updating versions as needed.
 
+## Automatic testing flow with GitHub actions
+
+All the tests will run in parallel for each service on create/update of a pull request
+
 ## TODO
 
 - Add Swagger docs and ui
-- Remove Stripe sample code from .gitignore
-- Add order:updated event to be emited upon order completed in order service
