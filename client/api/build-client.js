@@ -3,7 +3,8 @@ import axios from 'axios';
 export function buildServersideClient({ req }) {
   // http://SERVICENAME.NAMESPACE.svc.cluster.local
   return axios.create({
-    baseURL: 'http://ingress-nginx-controller.ingress-nginx.svc.cluster.local',
+    // eslint-disable-next-line no-undef
+    baseURL: process?.env?.BASE_URL || 'http://www.useticketing.store/',
     headers: req.headers,
   });
 }
