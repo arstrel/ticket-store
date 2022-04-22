@@ -4,7 +4,9 @@
   "description": "Client NextJS app for ticketing store",
   "main": "index.js",
   "scripts": {
-    "dev": "next",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "lint": "next lint"
   },
   "keywords": [],

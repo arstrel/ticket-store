@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
-import styles from 'styles/common.module.scss';
+import styles from '../styles/common.module.scss';
 
 export default function useRequest({
   url,

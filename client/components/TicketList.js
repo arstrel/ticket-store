@@ -1,5 +1,5 @@
 import TicketCard from './TicketCard';
-import styles from 'styles/ticket.module.scss';
+import styles from '../styles/ticket.module.scss';
 
 export default function TicketList({ tickets }) {
   if (!tickets?.length) {

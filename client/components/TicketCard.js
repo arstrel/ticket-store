@@ -1,6 +1,6 @@
-import styles from 'styles/ticket.module.scss';
+import styles from '../styles/ticket.module.scss';
 import Image from 'next/image';
-import cardDefaultPic from 'content/images/sale.jpg';
+import cardDefaultPic from '../content/images/sale.jpg';
 import Link from 'next/link';
 
 export default function TicketCard({ ticket }) {

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import useRequest from 'hooks/use-request';
+import useRequest from '../hooks/use-request';
 import Router from 'next/router';
 
 export default function AuthForm({ type }) {
