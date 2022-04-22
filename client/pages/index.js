@@ -13,7 +13,7 @@ function LandingPage({ tickets }) {
   return (
     <div className="container p-4">
       <div className="d-flex justify-content-between align-items-center">
-        <h2>Available Tickets</h2>
+        <h1>Available Tickets</h1>
         <div className="form-check form-switch">
           <input
             className="form-check-input"
