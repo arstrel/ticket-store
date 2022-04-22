@@ -1,13 +1,11 @@
-// import AuthForm from 'components/AuthForm';
-import Test from 'components/Test';
-// import { AUTH_FORM_TYPE } from 'appConstants';
+import { AUTH_FORM_TYPE } from 'appConstants';
+import SignForm from 'components/SignForm';
 
 export default function Signin() {
   return (
     <div className="container">
       <h1>Signin</h1>
-      {/* <AuthForm type={AUTH_FORM_TYPE.signin} /> */}
-      <Test />
+      <SignForm type={AUTH_FORM_TYPE.signin} />
     </div>
   );
 }

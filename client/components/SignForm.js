@@ -2,7 +2,7 @@ import { useState } from 'react';
 import useRequest from 'hooks/use-request';
 import Router from 'next/router';
 
-function AuthForm({ type }) {
+function SignForm({ type }) {
   const [formValues, setFormValues] = useState({ email: '', password: '' });
   const { doRequest, errors } = useRequest({
     url: type.url,
@@ -60,4 +60,4 @@ function AuthForm({ type }) {
   );
 }
 
-export default AuthForm;
+export default SignForm;
