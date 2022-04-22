@@ -1,7 +1,7 @@
-import { buildServersideClient } from '../api/build-client';
-import TicketList from '../components/TicketList';
+import { buildServersideClient } from 'api/build-client';
+import TicketList from 'components/TicketList';
 import { useState } from 'react';
-import TicketTable from '../components/TicketTable';
+import TicketTable from 'components/TicketTable';
 
 function LandingPage({ tickets }) {
   const [tableMode, setTableMode] = useState(false);

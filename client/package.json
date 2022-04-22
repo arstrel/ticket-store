@@ -20,11 +20,12 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-stripe-checkout": "^2.6.3",
-    "sass": "^1.50.0"
-  },
-  "devDependencies": {
+    "sass": "^1.50.0",
     "@next/eslint-plugin-next": "^12.1.5",
     "eslint": "^8.13.0",
     "eslint-plugin-react": "^7.29.4"
+  },
+  "resolutions": {
+    "cssnano-preset-simple": "3.0.0"
   }
 }

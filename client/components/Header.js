@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import logoPic from '../content/images/logo.svg';
-import styles from '../styles/header.module.css';
-import { useAppContext } from '../context/state';
+import logoPic from 'content/images/logo.svg';
+import styles from 'styles/header.module.css';
+import { useAppContext } from 'context/state';
 import { useEffect } from 'react';
 
 export default function Header({ currentUser }) {
