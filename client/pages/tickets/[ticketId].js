@@ -21,7 +21,7 @@ export default function SingleTicket({ ticket, currentUser }) {
       <p>id: {ticketId}</p>
       <p>Title: {ticket.title}</p>
       <h4>Price: {ticket.price}</h4>
-      <p>isOwner?: {currentUser.id === ticket.userId ? 'Yes' : 'No'}</p>
+      <p>isOwner?: {currentUser?.id === ticket.userId ? 'Yes' : 'No'}</p>
       <div>{errors}</div>
       <button className="btn btn-primary" onClick={purchaseRequest}>
         Purchase
