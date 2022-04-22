@@ -3,7 +3,12 @@
     "browser": true,
     "es2021": true
   },
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@next/next/recommended",
+    "plugin:react/jsx-runtime"
+  ],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -15,5 +20,10 @@
   "rules": {
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }
