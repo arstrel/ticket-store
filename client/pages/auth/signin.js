@@ -1,4 +1,4 @@
-import AuthForm from '@/components/AuthForm';
+import AuthForm from '../../components/AuthForm';
 import { AUTH_FORM_TYPE } from 'appConstants';
 
 export default function Signin() {
