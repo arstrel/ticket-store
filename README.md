@@ -3,19 +3,32 @@
 Ticket store using Typescript and microservices architecture.
 
 HTTPS certificate is not set so the project is available via http [here](http://www.useticketing.store/)
+
 ![deploy manifest](https://github.com/github/docs/actions/workflows/deploy-manifest.yaml/badge.svg)
+
 ![deploy auth](https://github.com/github/docs/actions/workflows/deploy-auth.yaml/badge.svg)
+
 ![deploy client](https://github.com/github/docs/actions/workflows/deploy-client.yaml/badge.svg)
+
 ![deploy expiration](https://github.com/github/docs/actions/workflows/deploy-expiration.yaml/badge.svg)
+
 ![deploy orders](https://github.com/github/docs/actions/workflows/deploy-orders.yaml/badge.svg)
+
 ![deploy payments](https://github.com/github/docs/actions/workflows/deploy-payments.yaml/badge.svg)
+
 ![deploy tickets](https://github.com/github/docs/actions/workflows/deploy-tickets.yaml/badge.svg)
 
 ![test auth](https://github.com/github/docs/actions/workflows/test-auth.yml/badge.svg)
+
 ![test orders](https://github.com/github/docs/actions/workflows/test-orders.yaml/badge.svg)
+
 ![test payments](https://github.com/github/docs/actions/workflows/test-payments.yaml/badge.svg)
+
 ![test tickets](https://github.com/github/docs/actions/workflows/test-tickets.yaml/badge.svg)
-![example workflow](https://github.com/arstrel/ticket-store/actions/workflows/deploy-manifest/badge.svg)
+
+![example workflow](https://github.com/arstrel/ticket-store/.github/workflows/deploy-manifest/badge.svg)
+
+![deploy manifest](https://github.com/arstrel/ticket-store/github/workflows/deploy-manifest/badge.svg)
 
 ## Deployment
 
