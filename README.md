@@ -4,17 +4,15 @@ Ticket store using Typescript and microservices architecture.
 
 HTTPS certificate is not set so the project is available via http [here](http://www.useticketing.store/)
 
-![deploy manifests](https://github.com/arstrel/ticket-store/actions/workflows/deploy-manifests.yaml/badge.svg)\
-![deploy auth](https://github.com/arstrel/ticket-store/actions/workflows/deploy-auth.yaml/badge.svg)\
-![deploy client](https://github.com/arstrel/ticket-store/actions/workflows/deploy-client.yaml/badge.svg)\
-![deploy expiration](https://github.com/arstrel/ticket-store/actions/workflows/deploy-expiration.yaml/badge.svg)\
-![deploy orders](https://github.com/arstrel/ticket-store/actions/workflows/deploy-orders.yaml/badge.svg)\
-![deploy payments](https://github.com/arstrel/ticket-store/actions/workflows/deploy-payments.yaml/badge.svg)\
-![deploy tickets](https://github.com/arstrel/ticket-store/actions/workflows/deploy-tickets.yaml/badge.svg)\
-![test auth](https://github.com/arstrel/ticket-store/actions/workflows/tests-auth.yml/badge.svg)\
-![test orders](https://github.com/arstrel/ticket-store/actions/workflows/tests-orders.yaml/badge.svg)\
-![test payments](https://github.com/arstrel/ticket-store/actions/workflows/tests-payments.yml/badge.svg)\
-![test tickets](https://github.com/arstrel/ticket-store/actions/workflows/tests-tickets.yaml/badge.svg)\
+| Deployments                                                                                                      | Tests                                                                                                    |
+| ---------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| ![deploy manifests](https://github.com/arstrel/ticket-store/actions/workflows/deploy-manifests.yaml/badge.svg)   | ![test auth](https://github.com/arstrel/ticket-store/actions/workflows/tests-auth.yml/badge.svg)         |
+| ![deploy auth](https://github.com/arstrel/ticket-store/actions/workflows/deploy-auth.yaml/badge.svg)             | ![test orders](https://github.com/arstrel/ticket-store/actions/workflows/tests-orders.yaml/badge.svg)    |
+| ![deploy client](https://github.com/arstrel/ticket-store/actions/workflows/deploy-client.yaml/badge.svg)         | ![test payments](https://github.com/arstrel/ticket-store/actions/workflows/tests-payments.yml/badge.svg) |
+| ![deploy expiration](https://github.com/arstrel/ticket-store/actions/workflows/deploy-expiration.yaml/badge.svg) | ![test tickets](https://github.com/arstrel/ticket-store/actions/workflows/tests-tickets.yaml/badge.svg)  |
+| ![deploy orders](https://github.com/arstrel/ticket-store/actions/workflows/deploy-orders.yaml/badge.svg)         |                                                                                                          |
+| ![deploy payments](https://github.com/arstrel/ticket-store/actions/workflows/deploy-payments.yaml/badge.svg)     |                                                                                                          |
+| ![deploy tickets](https://github.com/arstrel/ticket-store/actions/workflows/deploy-tickets.yaml/badge.svg)       |                                                                                                          |
 
 ## Deployment
 
