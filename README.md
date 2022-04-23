@@ -2,6 +2,32 @@
 
 Ticket store using Typescript and microservices architecture.
 
+HTTPS certificate is not set so the project is available via http [here](http://www.useticketing.store/)
+
+## Deployment
+
+[![DigitalOcean Referral Badge](https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%201.svg)](https://www.digitalocean.com/?refcode=c772a2948f16&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge)
+
+The project is deployed in a kubernetes cluster hosted in [Digital Ocean](https://www.digitalocean.com/products/kubernetes) and available for testing at [www.useticketing.store](http://www.useticketing.store/)
+
+The project relies on GitHub actions for CI/CD.
+Three GH Actions secrets are needed for it work DOCKER_USERNAME, DOCKER_PASSWORD, DIGITALOCEAN_ACCESS_TOKEN
+
+On pull request the tests will run automatically for tickets, orders, auth and payments depending on if there were any changes made to these folders.
+On merge or push to `main` branch, `deploy-<service>` workflows will be triggered.
+Deploy workflows build updated docker image, push it to docker hub and run rollout restart of kubernetes deployment.
+
+There are several steps to seting up this kubernetes cluster:
+
+1. Go to Digital Ocean and create a cluster with 3-4 smallest nodes (1Gb memory and 1vCPU)
+2. Follow Digital Ocean steps, install `doctl` and add kubctl context
+3. Create two k8s cluster secrets for jwt token and stripe key
+   `kubectl create secret generic jwt-secret --from-literal=JWT_KEY=your-secret-word`
+   `kubectl create secret generic stripe-secret --from-literal STRIPE_KEY=sk_test_LOtSuQS8KJV2ZPMXcz`
+4. Create an ingress nginx load balancer by running a command from [the docs](https://kubernetes.github.io/ingress-nginx/deploy/#digital-ocean)
+   `kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.0/deploy/static/provider/do/deploy.yaml`
+5. Run `kubectl apply -f infra/k8s && kubectl apply -f infra/k8s-prod` to create all the needed k8s resources
+
 ## Services
 
 1. Client: React app
@@ -11,9 +37,11 @@ Ticket store using Typescript and microservices architecture.
 5. Expiration: Persistent timer service backed by Redis
 6. Payment service with Stripe
 
+The project uses an npm package that contains shared code and type definitions that can be found [here](https://www.npmjs.com/package/@sbsoftworks/gittix-common)
+
 ## Other Technologies used:
 
-1. NATS Streaming server
+1. [NATS Streaming server](https://docs.nats.io/)
 2. Kubernetes with Ingress-nginx load balancer
 3. MongoDB with Mongoose, one for each of the backend services
 
@@ -24,6 +52,11 @@ Common code and type definitions are separated into npm library that can be seen
 Each service connects to a separate database and runs in a separate container. All the containers are orchestrated by kubernetes.
 Skaffold is used to run all the parts on local and enable rebuild/restart on code changes.
 Run `skaffold dev` to start all services on local
+
+If unsafe error in browser. type:
+
+`thisisunsafe`
+It happens because chrome detects that load balancer proxies the https request and does not trust it.
 
 ## Testing
 
