@@ -15,6 +15,7 @@ HTTPS certificate is not set so the project is available via http [here](http://
 ![test orders](https://github.com/github/docs/actions/workflows/test-orders.yaml/badge.svg)
 ![test payments](https://github.com/github/docs/actions/workflows/test-payments.yaml/badge.svg)
 ![test tickets](https://github.com/github/docs/actions/workflows/test-tickets.yaml/badge.svg)
+![example workflow](https://github.com/arstrel/ticket-store/actions/workflows/deploy-manifest/badge.svg)
 
 ## Deployment
 
