@@ -26,9 +26,9 @@ HTTPS certificate is not set so the project is available via http [here](http://
 
 ![test tickets](https://github.com/github/docs/actions/workflows/test-tickets.yaml/badge.svg)
 
-![example workflow](https://github.com/arstrel/ticket-store/.github/workflows/deploy-manifest/badge.svg)
+![example workflow](https://github.com/arstrel/ticket-store/.github/workflows/deploy-manifest.yaml/badge.svg)
 
-![deploy manifest](https://github.com/arstrel/ticket-store/github/workflows/deploy-manifest/badge.svg)
+![deploy manifest](https://github.com/arstrel/ticket-store/github/workflows/deploy-manifest.yaml/badge.svg)
 
 ## Deployment
 
