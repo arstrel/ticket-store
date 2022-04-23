@@ -4,33 +4,18 @@ Ticket store using Typescript and microservices architecture.
 
 HTTPS certificate is not set so the project is available via http [here](http://www.useticketing.store/)
 
-![deploy manifest](https://github.com/github/docs/workflows/deploy-manifest.yaml/badge.svg)
+![deploy manifests](https://github.com/arstrel/ticket-store/actions/workflows/deploy-manifests.yaml/badge.svg)
+![deploy auth](https://github.com/arstrel/ticket-store/actions/workflows/deploy-auth.yaml/badge.svg)\
+![deploy client](https://github.com/arstrel/ticket-store/actions/workflows/deploy-client.yaml/badge.svg)\
+![deploy expiration](https://github.com/arstrel/ticket-store/actions/workflows/deploy-expiration.yaml/badge.svg)\
+![deploy orders](https://github.com/arstrel/ticket-store/actions/workflows/deploy-orders.yaml/badge.svg)\
+![deploy payments](https://github.com/arstrel/ticket-store/actions/workflows/deploy-payments.yaml/badge.svg)\
+![deploy tickets](https://github.com/arstrel/ticket-store/actions/workflows/deploy-tickets.yaml/badge.svg)\
 
-![deploy auth](https://github.com/github/docs/workflows/deploy-auth.yaml/badge.svg)
-
-![deploy client](https://github.com/github/docs/workflows/deploy-client.yaml/badge.svg)
-
-![deploy expiration](https://github.com/github/docs/workflows/deploy-expiration.yaml/badge.svg)
-
-![deploy orders](https://github.com/github/docs/workflows/deploy-orders.yaml/badge.svg)
-
-![deploy payments](https://github.com/github/docs/workflows/deploy-payments.yaml/badge.svg)
-
-![deploy tickets](https://github.com/github/docs/workflows/deploy-tickets.yaml/badge.svg)
-
-![test auth](https://github.com/github/docs/workflows/tests-auth.yml/badge.svg)
-
-![test orders](https://github.com/github/docs/workflows/tests-orders.yaml/badge.svg)
-
-![test payments](https://github.com/github/docs/workflows/tests-payments.yaml/badge.svg)
-
-![test tickets](https://github.com/github/docs/workflows/tests-tickets.yaml/badge.svg)
-
-![example workflow](https://github.com/arstrel/ticket-store/actions/workflows/deploy-manifests.yaml/badge.svg)
-
-![deploy manifest](https://github.com/arstrel/ticket-store/github/workflows/deploy-manifests.yaml/badge.svg)
-![deploy manifest](https://github.com/arstrel/ticket-store/github/workflows/deploy-auth.yaml/badge.svg)
-![deploy manifest](https://github.com/arstrel/ticket-store/github/workflows/tests-tickets.yaml/badge.svg)
+![test auth](https://github.com/arstrel/ticket-store/actions/workflows/tests-auth.yml/badge.svg)\
+![test orders](https://github.com/arstrel/ticket-store/actions/workflows/tests-orders.yaml/badge.svg)\
+![test payments](https://github.com/arstrel/ticket-store/actions/workflows/tests-payments.yaml/badge.svg)\
+![test tickets](https://github.com/arstrel/ticket-store/actions/workflows/tests-tickets.yaml/badge.svg)\
 
 ## Deployment
 
