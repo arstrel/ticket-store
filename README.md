@@ -3,6 +3,18 @@
 Ticket store using Typescript and microservices architecture.
 
 HTTPS certificate is not set so the project is available via http [here](http://www.useticketing.store/)
+![deploy manifest](https://github.com/github/docs/actions/workflows/deploy-manifest.yml/badge.svg)
+![deploy auth](https://github.com/github/docs/actions/workflows/deploy-auth.yml/badge.svg)
+![deploy client](https://github.com/github/docs/actions/workflows/deploy-client.yml/badge.svg)
+![deploy expiration](https://github.com/github/docs/actions/workflows/deploy-expiration.yml/badge.svg)
+![deploy orders](https://github.com/github/docs/actions/workflows/deploy-orders.yml/badge.svg)
+![deploy payments](https://github.com/github/docs/actions/workflows/deploy-payments.yml/badge.svg)
+![deploy tickets](https://github.com/github/docs/actions/workflows/deploy-tickets.yml/badge.svg)
+
+![test auth](https://github.com/github/docs/actions/workflows/test-auth.yml/badge.svg)
+![test orders](https://github.com/github/docs/actions/workflows/test-orders.yml/badge.svg)
+![test payments](https://github.com/github/docs/actions/workflows/test-payments.yml/badge.svg)
+![test tickets](https://github.com/github/docs/actions/workflows/test-tickets.yml/badge.svg)
 
 ## Deployment
 
@@ -42,8 +54,9 @@ The project uses an npm package that contains shared code and type definitions t
 ## Other Technologies used:
 
 1. [NATS Streaming server](https://docs.nats.io/)
-2. Kubernetes with Ingress-nginx load balancer
-3. MongoDB with Mongoose, one for each of the backend services
+2. Kubernetes with [Ingress-nginx load balancer](https://kubernetes.github.io/ingress-nginx/deploy/#digital-ocean)
+3. [MongoDB with Mongoose](https://mongoosejs.com/docs/index.html), one for each of the backend services
+4. [Redis](https://redis.io/) for expiration service made with [bull js](https://www.npmjs.com/package/bull) queue for Node
 
 Common code and type definitions are separated into npm library that can be seen [here](https://github.com/arstrel/sbsoftworks-gittix-common)
 
@@ -140,3 +153,4 @@ All the tests will run in parallel for each service on create/update of a pull r
 ## TODO
 
 - Add Swagger docs and ui
+- Add a link to "My orders" to be able to go back to started order `/orders/:id` for orders in a "created" state
