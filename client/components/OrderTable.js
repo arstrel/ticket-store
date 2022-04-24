@@ -29,9 +29,15 @@ export default function OrderTable({ orders }) {
               <td>${order.ticket.price}</td>
               <td className={statusClasses}>{order.status}</td>
               <td>
-                <Link href={`/orders/details/${order.id}`} passHref>
-                  <a>Details</a>
-                </Link>
+                {order.status === 'created' ? (
+                  <Link href={`/orders/${order.id}`} passHref>
+                    <a>Continue purchase...</a>
+                  </Link>
+                ) : (
+                  <Link href={`/orders/details/${order.id}`} passHref>
+                    <a>Details</a>
+                  </Link>
+                )}
               </td>
             </tr>
           );

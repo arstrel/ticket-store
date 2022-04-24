@@ -147,8 +147,3 @@ Ticket service is responsible for creating a tickets and updating versions as ne
 ## Automatic testing flow with GitHub actions
 
 All the tests will run in parallel for each service on create/update of a pull request
-
-## TODO
-
-- Add Swagger docs and ui
-- Add a link to "My orders" to be able to go back to started order `/orders/:id` for orders in a "created" state
