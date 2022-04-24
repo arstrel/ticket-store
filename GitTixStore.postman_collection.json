@@ -1,0 +1,356 @@
+{
+	"info": {
+		"_postman_id": "11491da9-0252-4df6-8433-00ef40bda0dc",
+		"name": "GitTix store",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Signup",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"test1@test.com\",\n    \"password\": \"test\"\n}"
+				},
+				"url": {
+					"raw": "{{ticketing_host}}/api/users/signup",
+					"host": [
+						"{{ticketing_host}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"arstrel@gmail.com\",\n    \"password\": \"testtest#1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://ticketing.dev/api/users/signin",
+					"protocol": "https",
+					"host": [
+						"ticketing",
+						"dev"
+					],
+					"path": [
+						"api",
+						"users",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signout",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://ticketing.dev/api/users/signout",
+					"protocol": "https",
+					"host": [
+						"ticketing",
+						"dev"
+					],
+					"path": [
+						"api",
+						"users",
+						"signout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Current user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{ticketing_host}}/api/users/currentuser",
+					"host": [
+						"{{ticketing_host}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"currentuser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All tickets",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{ticketing_host}}/api/tickets",
+					"host": [
+						"{{ticketing_host}}"
+					],
+					"path": [
+						"api",
+						"tickets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create ticket",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"title\",\n    \"price\": 88\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{ticketing_host}}/api/tickets",
+					"host": [
+						"{{ticketing_host}}"
+					],
+					"path": [
+						"api",
+						"tickets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update ticket",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"updated 6 title\",\n    \"price\": 110\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{ticketing_host}}/api/tickets/6255ea096af941ac89ef8d54",
+					"host": [
+						"{{ticketing_host}}"
+					],
+					"path": [
+						"api",
+						"tickets",
+						"6255ea096af941ac89ef8d54"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user's orders",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{ticketing_host}}/api/orders",
+					"host": [
+						"{{ticketing_host}}"
+					],
+					"path": [
+						"api",
+						"orders"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "6254b0f4bec277a9d8f6afe7",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"ticketId\": \"625f2e4288e24ce37fca63c8\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{ticketing_host}}/api/orders/",
+					"host": [
+						"{{ticketing_host}}"
+					],
+					"path": [
+						"api",
+						"orders",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get single order",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"ticketId\": \"6254b0f4bec277a9d8f6afe7\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{ticketing_host}}/api/orders/625a19e858ce014b2cc4989a",
+					"host": [
+						"{{ticketing_host}}"
+					],
+					"path": [
+						"api",
+						"orders",
+						"625a19e858ce014b2cc4989a"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "6254b0f4bec277a9d8f6afe7",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create charge",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"token\": \"tok_visa\",\n    \"orderId\": \"625cb1ee6aa954f25b918937\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{ticketing_host}}/api/payments/",
+					"host": [
+						"{{ticketing_host}}"
+					],
+					"path": [
+						"api",
+						"payments",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get single ticket",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"ticketId\": \"6254b0f4bec277a9d8f6afe7\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{ticketing_host}}/api/tickets/:id",
+					"host": [
+						"{{ticketing_host}}"
+					],
+					"path": [
+						"api",
+						"tickets",
+						":id"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "6254b0f4bec277a9d8f6afe7",
+							"disabled": true
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "625cb1e788e24ce37fca6216"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
